@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HexyComb = Sign Up</title>
+</head>
+<body>
+    <div class="auth-container">
+        <h1>Create Your HexyComb Account</h1>
+        <p class="subtext">Create a username and password</p>
+
+        <form id="signupForm" action="/signup" method="POST" class="auth-form">
+            <label>Username</label>
+            <input id="user" type="text" name="username" placeholder="Enter username">
+
+            <label for="pass">Password</label>
+            <input id="pass" type="password" name="pass" placeholder="Enter password">
+
+            <label for="pass2">Confirm Password</label>
+            <input id="pass2" type="password" name="pass2" placeholder="Confirm password">
+
+            <button type="submit">Create Account</button>
+        </form>
+
+        <p class="switch-link">
+            Already have an account?
+            <a href="/login">Log in</a>
+        </p>
+
+        <div id="errorBox" class="hidden">
+            <span id="errorMessage"></span>
+        </div>
+    </div>
+</body>
+</html>
