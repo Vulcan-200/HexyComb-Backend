@@ -93,6 +93,7 @@ button:hover {
     padding: 14px 24px;
     margin: 0 0 20px 0;
     display: flex;
+    flex-direction: row;
     gap: 24px;
     border-bottom: 3px solid #d89b1f;
     box-shadow: 0 4px 12px rgba(242, 210, 139, 0.4);
@@ -105,6 +106,11 @@ button:hover {
     font-size: 18px;
     transition: 0.2s;
     padding: 0 25px 0 25px;
+}
+
+.navbar #right-side {
+  position: relative;
+  left: 66%;
 }
 
 .navbar a:hover {
@@ -126,4 +132,10 @@ button:hover {
 
 #title {
     font-size: 32px;
+}
+
+#centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
