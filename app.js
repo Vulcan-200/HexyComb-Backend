@@ -13,6 +13,45 @@ const startWebSocketServer = require('./websocket');
 
 const app = express();
 
+// --- Unity Brotli URL Rewriting ---
+app.use((req, res, next) => {
+    if (req.url.startsWith('/Build/') && req.url.endsWith('.wasm')) {
+        req.url += '.br';
+    }
+    if (req.url.startsWith('/Build/') && req.url.endsWith('.js')) {
+        req.url += '.br';
+    }
+    if (req.url.startsWith('/Build/') && req.url.endsWith('.data')) {
+        req.url += '.br';
+    }
+    next();
+});
+
+// --- Unity Brotli Support ---
+app.use((req, res, next) => {
+    if (req.url.startsWith('/Build/') && req.url.endsWith('.wasm.br')) {
+        res.setHeader('Content-Type', 'application/wasm');
+        res.setHeader('Content-Encoding', 'br');
+    }
+    if (req.url.startsWith('/Build/') && req.url.endsWith('.js.br')) {
+        res.setHeader('Content-Type', 'application/javascript');
+        res.setHeader('Content-Encoding', 'br');
+    }
+    if (req.url.startsWith('/Build/') && req.url.endsWith('.data.br')) {
+        res.setHeader('Content-Type', 'application/octet-stream');
+        res.setHeader('Content-Encoding', 'br');
+    }
+    next();
+});
+
+app.use(express.static(path.join(__dirname, 'hosted')));
+
+// -- Handlebars --
+const handlebars = require('express-handlebars');
+app.engine('handlebars', handlebars.engine({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
+
 // -- MongoDB --
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB connected"))
@@ -26,7 +65,6 @@ const redisClient = createClient({
 redisClient.on('error', err => console.log('Redis Client Error', err));
 
 redisClient.connect().then(() => {
-    const app = express();
 
     const sessionMiddleware = session({
         key: 'sessionid',

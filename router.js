@@ -1,4 +1,5 @@
 // router.js
+const path = require('path');
 const express = require('express');
 const router = express.Router();
 
@@ -30,8 +31,14 @@ router.get('/playerCount', (req, res) => {
 // -- Root --
 router.get('/', mid.requiresSecure, mid.requiresLogout, Account.loginPage);
 
+// -- Game --
 router.get('/play', (req, res) => {
-    res.sendFile(path.join(__dirname, '../hosted/index.html'));
+    res.sendFile(path.join(__dirname, 'hosted/index.html'));
+});
+
+// -- Documentation
+router.get('/documentation', (req, res) => {
+    res.render('documentation');
 });
 
 // -- 404 --
