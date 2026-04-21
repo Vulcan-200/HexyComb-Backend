@@ -1,14 +1,11 @@
 <div class="page-card">
     <h1>Premium Option</h1>
 
-    <form id="loginForm" method="POST" action="/login">
-        <input type="text" name="username" placeholder="Username" required />
-        <input type="password" name="pass" placeholder="Password" required />
-        <button type="submit">Login</button>
-    </form>
+    <p>Your current status: {{#if premium}} Premium Member{{else}}Free User{{/if}}</p>
 
-    <p style="margin-top: 12px;">
-        Don't have an account?
-        <a href="/signup">Sign up</a>
-    </p>
+    <form method="POST" action="/premium/toggle">
+        <button>
+            {{#if premium}}Cancel Premium{{else}}Upgrade to Premium{{/if}}
+        </button>
+    </form>
 </div>

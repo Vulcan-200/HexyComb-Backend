@@ -17,7 +17,7 @@ router.get('/logout', mid.requiresSecure, mid.requiresLogin, Account.logout);
 router.get('/changePassword', mid.requiresSecure, mid.requiresLogout, Account.changePassword);
 
 // -- Profit Model --
-router.post('/premium/toggle', mid.requiresLogin, Account.changePassword);
+router.post('/premium/toggle', mid.requiresLogin, Account.togglePremium);
 
 // -- Matchmaking Routes --
 router.post('/invite/create', mid.requiresLogin, Match.createInviteMatch);
@@ -36,9 +36,15 @@ router.get('/play', (req, res) => {
     res.sendFile(path.join(__dirname, 'hosted/index.html'));
 });
 
-// -- Documentation
+// -- Documentation --
 router.get('/documentation', (req, res) => {
     res.render('documentation');
+});
+
+// -- Premium --
+router.get('/premium', mid.requiresSecure, mid.requiresLogin, (req, res) => {
+    console.log("SESSION:", req.session.account);
+    res.render('premium', {premium: req.session.account.premium});
 });
 
 // -- 404 --

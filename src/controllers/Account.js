@@ -101,6 +101,13 @@ const changePassword = async (req, res) => {
     return res.json({ message: 'Password updated successfully!' });
 }
 
+const togglePremium = async (req, res) => {
+    const account = await AccountModel.findById(req.session.account._id);
+    account.premium = !account.premium;
+    await account.save();
+    return res.json({ premium: account.premium });
+};
+
 module.exports = {
     loginPage,
     signupPage,
@@ -108,4 +115,5 @@ module.exports = {
     logout,
     signup,
     changePassword,
+    togglePremium,
 }
