@@ -44,13 +44,13 @@
       <div id="app"></div>
 
       <!-- Unity Loader -->
-       <script src="/UnityLoader.js"></script>
+       <script src="/HexyComb-WebBuild.loader.js"></script>
 
        <script>
             createUnityInstance(document.querySelector("#unity-canvas"), {
-                dataUrl: "Build/HexyComb-WebBuild.data",
-                frameworkUrl: "Build/HexyComb-WebBuild.framework.js",
-                codeUrl: "Build/HexyComb-WebBuild.wasm",
+                dataUrl: "Build/HexyComb-WebBuild.data.unityweb",
+                frameworkUrl: "Build/HexyComb-WebBuild.framework.js.unityweb",
+                codeUrl: "Build/HexyComb-WebBuild.wasm.unityweb",
                 streamingAssetsUrl: "StreamingAssets",
                 companyName: "HexyComb",
                 productName: "HexyComb",

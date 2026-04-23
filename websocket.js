@@ -28,7 +28,17 @@ function startWebSocketServer(server, sessionMiddleware)
     
         ws.on('message', (msg) =>
         {
-            const data = JSON.parse(msg);
+            let data;
+
+            try {
+                data = JSON.parse(msg.toString());
+            } catch (err) {
+                console.error("Failed to parse message:", msg, err);
+                return;
+            }
+
+            console.log("Received message: ", data);
+
 
             switch (data.type)
             {
@@ -58,7 +68,6 @@ function startWebSocketServer(server, sessionMiddleware)
             if (ws.readyState === ws.OPEN){
                 ws.send(msg);
             }
-                
         });
     }
 
