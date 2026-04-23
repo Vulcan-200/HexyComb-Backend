@@ -1,6 +1,7 @@
 // websocket.js
 const { WebSocketServer } = require('ws');
 const crypto = require('crypto');
+const { connect } = require('http2');
 
 let connectedPlayers = new Set();
 let randomQueue = [];
@@ -9,11 +10,22 @@ function startWebSocketServer(server, sessionMiddleware)
 {
     const wss = new WebSocketServer({ noServer: true});
 
-    // HTTP to WebSocket
-    server.on('connection', (ws) => {
+    // HTTP to WebSocket upgrade
+    server.on('upgrade', (req, socket, head) => {
+        if (req.url === "/ws") {
+            wss.handleUpgrade(req, socket, head, (ws) => {
+                wss.emit("connection", ws, req);
+            });
+        } else {
+            socket.destroy();
+        }
+    });
+
+    // WebSocket connection event
+    wss.on('connection', (ws) => {
         connectedPlayers.add(ws);
         broadcastPlayersCount();
-
+    
         ws.on('message', (msg) =>
         {
             const data = JSON.parse(msg);
