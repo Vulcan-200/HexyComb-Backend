@@ -154,16 +154,17 @@ const changePassword = async (req, res) => {
         return res.status(401).json({ error: "Not logged in!"});
     }
 
-    const match = await Account.authenticate(account.username, oldPass, () => {});
-    if (!match) {
-        return res.status(401).json({ error: 'Old password incorrect! '});
-    }
+    Account.authenticate(account.username, oldPass, async (err, verifiedAccount) => {
+        if (err || !verifiedAccount) {
+            return res.status(401).json({ error: 'Old password incorrect!' });
+        }
 
-    const newHash = await Account.generateHash(newPass);
-    account.password = newHash;
-    await account.save();
+        const newHash = await Account.generateHash(newPass);
+        account.password = newHash;
+        await account.save();
 
-    return res.json({ message: 'Password updated successfully!' });
+        return res.json({ success: true });
+    });
 };
 
 const togglePremium = async (req, res) => {
