@@ -1,15 +1,33 @@
 <div class="page-card">
-    <img id="profile-avatar" src="/img/hexycomb-avatar.png" alt="Profile Picture">
+    <div id="profile-header">
+        <img id="profile-avatar" src="/img/hexycomb-avatar.png" alt="Profile Picture">
 
-    <h1>Your Profile</h1>
+        <div id="profile-names">
+            <h2 id="nickname">{{account.nickname}}</h2>
+            <p id="username">@{{account.username}}</p>
+        </div>
+    </div>
 
-    <p><strong>Username:</strong> {{account.username}}</p>
-    <p><strong>Account Created:</strong> {{createdDate}}</p>
-    <p><strong>Premium Status:</strong>
-        {{#if account.premium}}
-            Premium User
-        {{else}}
-            Free User
-        {{/if}}
-    </p>
+    <hr id="profile-divider" />
+
+    <div id="profile-details">
+        <p><strong>Account Created:</strong> {{createdDate}}</p>
+
+        <p><strong>Premium Status:</strong>
+            {{#if account.premium}}
+                <span id="premium-text">Premium User</span>
+            {{else}}
+                <span id="free-text">Free User</span>
+            {{/if}}
+        </p>
+
+        <button id="change-nickname-btn" class="button" onclick="window.showNicknameModal()">Change Nickname</button>
+        <button id="change-username-btn" class="button" onclick="window.showUsernameModal()">Change Username</button>
+        <button id="change-password-btn" class="button" onclick="window.showPasswordModal()">Change Password</button>
+
+    </div>
+
+    <div id="nickname-modal"></div>
 </div>
+
+<script src="/profileBundle.js"></script>

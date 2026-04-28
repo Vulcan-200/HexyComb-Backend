@@ -5,6 +5,10 @@ const mongoose = require('mongoose');
 const saltRounds = 10;
 
 const AccountSchema = new mongoose.Schema({
+    nickname: {
+        type: String,
+        default: '',
+    },
     username: {
     type: String,
     required: true,
@@ -27,6 +31,7 @@ const AccountSchema = new mongoose.Schema({
 });
 
 AccountSchema.statics.toAPI = (doc) => ({
+    nickname: doc.nickname,
     username: doc.username,
     _id: doc._id,
     premium: doc.premium,

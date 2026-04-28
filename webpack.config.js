@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
   entry: {
     app: './src/client/index.jsx',
+    profile: './src/client/profile.jsx',
     client: './public/assets/client.js',
   },
   output: {

@@ -17,9 +17,8 @@ const profilePage = (req, res) => {
     );
 
     return res.render('profile', {
-        username: req.session.account.username,
+        account: req.session.account,
         createdDate: created,
-        premium: req.session.account.premium,
     });
 };
 
@@ -51,6 +50,7 @@ const logout = (req, res) => {
 
 // Signup
 const signup = async (req, res) => {
+    const nickname = `${req.body.nickname}` || '';
     const username = `${req.body.username}`;
     const pass = `${req.body.pass}`;
     const pass2 = `${req.body.pass2}`;
@@ -67,6 +67,7 @@ const signup = async (req, res) => {
         const hash = await Account.generateHash(pass);
 
         const newAccount = new Account({
+            nickname,
             username,
             password: hash,
             premium: false,
@@ -83,6 +84,57 @@ const signup = async (req, res) => {
             return res.status(400).json({ error: 'Username already in use!' });
         }
         return res.status(500).json({ error: 'An error occured!' });
+    }
+};
+
+// Change account info
+const changeNickname = async (req, res) => {
+    const { nickname } = req.body;
+
+    if (!nickname || nickname.trim().length === 0) {
+        return res.status(400).json({ error: "Nickname cannot be empty."});
+    }
+
+    try {
+        const account = await Account.findById(req.session.account._id);
+        if (!account) {
+            return res.status(401).json({ error: "Not logged in!" });
+        }
+
+        account.nickname = nickname;
+        await account.save();
+
+        req.session.account.nickname = nickname;
+
+        return res.json({ success: true, nickname });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Error updating nickname." });
+    }
+};
+
+const changeUsername = async (req, res) => {
+    const { username } = req.body;
+
+    if (!username || username.trim().length === 0) {
+        return res.status(400).json({ error: "Username cannot be empty."});
+    }
+
+    try {
+        const account = await Account.findById(req.session.account._id);
+        if (!account) {
+            return res.status(401).json({ error: "Not logged in!" });
+        }
+
+        account.username = username;
+        await account.save();
+
+        req.session.account.username = username;
+
+        return res.json({ success: true, username });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Error updating username." });
     }
 };
 
@@ -112,7 +164,7 @@ const changePassword = async (req, res) => {
     await account.save();
 
     return res.json({ message: 'Password updated successfully!' });
-}
+};
 
 const togglePremium = async (req, res) => {
     const account = await Account.findById(req.session.account._id);
@@ -132,6 +184,8 @@ module.exports = {
     login,
     logout,
     signup,
+    changeNickname,
+    changeUsername,
     changePassword,
     togglePremium,
 }

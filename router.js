@@ -14,8 +14,11 @@ router.post('/login', mid.requiresSecure, mid.requiresLogout, Account.login);
 router.get('/signup', mid.requiresSecure, mid.requiresLogout, Account.signupPage);
 router.post('/signup', mid.requiresSecure, mid.requiresLogout, Account.signup);
 router.get('/logout', mid.requiresSecure, mid.requiresLogin, Account.logout);
-router.get('/changePassword', mid.requiresSecure, mid.requiresLogout, Account.changePassword);
 router.get('/profile', mid.requiresSecure, mid.requiresLogin, Account.profilePage);
+
+router.post('/account/nickname', mid.requiresLogin, Account.changeNickname);
+router.post('/account/username', mid.requiresLogin, Account.changeUsername);
+router.post('/account/password', mid.requiresLogin, Account.changePassword);
 
 // -- Premium Check --
 router.get('/account/status', mid.requiresLogin, (req, res) => {
@@ -56,7 +59,6 @@ router.get('/premium', mid.requiresSecure, mid.requiresLogin, (req, res) => {
 
 // -- Premium Toggle --
 router.post('/premium/toggle', mid.requiresLogin, Account.togglePremium);
-
 
 // -- 404 --
 router.get('/*wild', (req, res) => {

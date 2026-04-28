@@ -10,8 +10,8 @@ const PremiumModal = ({ visible, onClose }) => {
                 <p>You must be a Premium Member to play online.</p>
 
                 <div className="modal-buttons">
-                    <button onClick={onClose}>Close</button>
                     <a href="/premium" className="button-link">Upgrade to Premium</a>
+                    <button onClick={onClose}>Close</button>
                 </div>
             </div>
         </div>
