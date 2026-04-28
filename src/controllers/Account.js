@@ -10,6 +10,19 @@ const signupPage = (req, res) => {
     return res.render('signup');
 };
 
+const profilePage = (req, res) => {
+    const created = new Date(req.session.account.createdDate).toLocaleDateString(
+        'en-US',
+        { year: 'numeric', month: 'long', day: 'numeric' }
+    );
+
+    return res.render('profile', {
+        username: req.session.account.username,
+        createdDate: created,
+        premium: req.session.account.premium,
+    });
+};
+
 // Login
 const login = (req, res) => {
     const username = `${req.body.username}`;
@@ -102,15 +115,20 @@ const changePassword = async (req, res) => {
 }
 
 const togglePremium = async (req, res) => {
-    const account = await AccountModel.findById(req.session.account._id);
+    const account = await Account.findById(req.session.account._id);
     account.premium = !account.premium;
     await account.save();
+
+    // Update session
+    req.session.account.premium = account.premium;
+
     return res.json({ premium: account.premium });
 };
 
 module.exports = {
     loginPage,
     signupPage,
+    profilePage,
     login,
     logout,
     signup,

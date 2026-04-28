@@ -10,6 +10,24 @@ function startWebSocketServer(server, sessionMiddleware)
 {
     const wss = new WebSocketServer({ noServer: true});
 
+    // Ping all clients every 25 seconds
+    const interval = setInterval(() => {
+        wss.clients.forEach((ws) => {
+            if (ws.isAlive === false)
+            {
+                console.log("Terminating dead client");
+                return ws.terminate();
+            }
+
+            ws.isAlive = false;
+            ws.ping();
+        });
+    }, 25000);
+
+    wss.on('close', () => {
+        clearInterval(interval);
+    });
+
     // HTTP to WebSocket upgrade
     server.on('upgrade', (req, socket, head) => {
         if (req.url === "/ws") {
@@ -23,6 +41,12 @@ function startWebSocketServer(server, sessionMiddleware)
 
     // WebSocket connection event
     wss.on('connection', (ws) => {
+
+        ws.isAlive = true;
+        ws.on('pong', () => {
+            ws.isAlive = true;
+        });
+
         connectedPlayers.add(ws);
         broadcastPlayersCount();
     

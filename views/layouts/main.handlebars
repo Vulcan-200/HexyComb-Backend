@@ -20,11 +20,18 @@
             <a href="/premium">Premium</a>
         </div>
         <div id="right-side">
+            {{#if loggedIn}}
+            <a href="profile">Profile</a>
+            <a href="logout">Logout</a>
+            {{else}}
             <a href="/signup">Sign Up</a>
             <a href="/login">Login</a>
+            {{/if}}
         </div>
     </nav>
 
     {{{body}}}
+
+    <script src="/clientBundle.js"></script>
 </body>
 </html>

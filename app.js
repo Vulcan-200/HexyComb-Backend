@@ -46,6 +46,8 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, 'hosted')));
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 // -- Handlebars --
 const handlebars = require('express-handlebars');
 app.engine('handlebars', handlebars.engine({ defaultLayout: 'main' }));
@@ -81,6 +83,11 @@ redisClient.connect().then(() => {
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
+    app.use((req, res, next) => {
+        res.locals.loggedIn = !!req.session.account;
+        res.locals.account = req.session.account || null;
+        next();
+    });
     // -- Routes --
     app.use('/', router);
 

@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: {
     app: './src/client/index.jsx',
-    login: './public/assets/client.js',
+    client: './public/assets/client.js',
   },
   output: {
     path: path.resolve(__dirname, 'hosted'),

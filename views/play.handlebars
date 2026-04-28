@@ -1,0 +1,21 @@
+<div id="unity-container">
+    <canvas id="unity-canvas"></canvas>
+</div>
+
+<div id="app"></div>
+
+<script src="/HexyComb-WebBuild.loader.js"></script>
+
+<script>
+    createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/HexyComb-WebBuild.data.unityweb",
+        frameworkUrl: "Build/HexyComb-WebBuild.framework.js.unityweb",
+        codeUrl: "Build/HexyComb-WebBuild.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "HexyComb",
+        productName: "HexyComb",
+        productVersion: "1.0",
+    });
+</script>
+
+<script src="/appBundle.js"></script>

@@ -30,10 +30,11 @@ AccountSchema.statics.toAPI = (doc) => ({
     username: doc.username,
     _id: doc._id,
     premium: doc.premium,
+    createdDate: doc.createdDate,
 });
 
-AccountSchema.statics.generateHash = (password) => {
-    bcrypt.hash(password, saltRounds);
+AccountSchema.statics.generateHash = async (password) => {
+    return bcrypt.hash(password, saltRounds);
 }
 
 AccountSchema.statics.authenticate = async (username, password, callback) => {
@@ -54,5 +55,5 @@ AccountSchema.statics.authenticate = async (username, password, callback) => {
     }
 };
 
-AccountModel = mongoose.model('Account', AccountSchema);
+const AccountModel = mongoose.model('Account', AccountSchema);
 module.exports = AccountModel;

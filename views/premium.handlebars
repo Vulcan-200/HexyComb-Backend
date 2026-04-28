@@ -1,11 +1,62 @@
-<div class="page-card">
+<div class="page-card" id="premium-page">
     <h1>Premium Option</h1>
 
-    <p>Your current status: {{#if premium}} Premium Member{{else}}Free User{{/if}}</p>
+    <p class="premium-status">
+        Your current status: 
+        {{#if premium}}
+        <span id="premium-tag">Premium Member</span>
+        {{else}}
+        <span id="free-tag">Free User</span>
+        {{/if}}
+    </p>
 
-    <form method="POST" action="/premium/toggle">
-        <button>
-            {{#if premium}}Cancel Premium{{else}}Upgrade to Premium{{/if}}
-        </button>
-    </form>
+    <div id="premium-panels">
+
+        <!-- Free Panel -->
+        <div id="free-panel">
+            <h2>Free Demo</h2>
+            <ul>
+                <li> Local Play Only</li>
+                <li> Pass and Play</li>
+                <li> Cross Play</li>
+                <li> No Saved Games</li>
+            </ul>
+
+            {{#if premium}}
+                <button id="already-premium" class="panel-btn" 
+                type="button" disabled>
+                    Already Premium
+                </button>
+            {{else}}
+                <button id="continue-free" class="panel-btn"
+                type="button">
+                    Continue Free
+                </button>
+            {{/if}}
+        </div>
+
+        <!-- Premium Panel -->
+        <div id="premium-panel">
+            <h2>Premium</h2>
+            <ul>
+                <li> Online Multiplayer</li>
+                <li> Random Matchmaking</li>
+                <li> Invite Friends</li>
+                <li> View Past Games</li>
+            </ul>
+
+            {{#if premium}}
+                <button id="cancel-premium" class="panel-btn" 
+                type="button"
+                style="background:#c0392b;">
+                    Cancel Premium
+                </button>
+            {{else}}
+                <button id="upgrade-premium" class="panel-btn"
+                type="button">
+                    Upgrade to Premium
+                </button>
+            {{/if}}
+        </div>
+    </div>
 </div>

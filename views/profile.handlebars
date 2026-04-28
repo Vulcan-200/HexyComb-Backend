@@ -1,0 +1,15 @@
+<div class="page-card">
+    <img id="profile-avatar" src="/img/hexycomb-avatar.png" alt="Profile Picture">
+
+    <h1>Your Profile</h1>
+
+    <p><strong>Username:</strong> {{account.username}}</p>
+    <p><strong>Account Created:</strong> {{createdDate}}</p>
+    <p><strong>Premium Status:</strong>
+        {{#if account.premium}}
+            Premium User
+        {{else}}
+            Free User
+        {{/if}}
+    </p>
+</div>
