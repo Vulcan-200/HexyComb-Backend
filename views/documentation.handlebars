@@ -8,110 +8,223 @@
 
     <div class="question">
         <h4>What is the intended purpose of your application?</h4>
-        <p>I have been working on HexyComb for a whole semester now, and I wanted to make it accessible across the web. HexyComb itself is a fun game to play, but this webpage serves not only as a place where new players can explore the game of Hive, but also play against other random players or even send invites to play with their friends. It also comes with an interesting side effect of being able to store games as a list of moves, which over time, can be used to train AI on which move is the best.</p>
-    </div>
-
-    <div class="question">
-        <h4>What work has been completed for this milestone?</h4>
-        <p>The foundation for many of the endpoints, a basic style that applies to all handlebars, React is integrated into the /play endpoint and is bundled with Webpack</p>
-    </div>
-
-    <div class="question">
-        <h4>What work is left and how do you plan to complete it?</h4>
-        <p>With only about a week left in the semester, it's difficult for me to choose which features I want to implement. Since I have the endpoints for premium and an update player count, I will likely start with those two features. Learning from Project 1, and, considering how much I've struggled already, I'll be keeping my scope short.</p>
+        <p>After an entire semester of working on my HexyComb application, I'm excited to show off the gameplay and functionality. The purpose of the application is to allow players the ability to create accounts, play locally or online (should they pay $0.00 for premium status), invite friends to matches and to track their own gameplay. The game also helps new players learn about the game and even practice by playing puzzles. Though I wanted to include the option to save completed games as structured move lists for future review, I ran out of time.</p>
     </div>
 
     <div class="question">
         <h4>How are you using React?</h4>
-        <p>Since most of my time was spent learning about Unity Brotli and .br files, I did not spend much time creating components. Instead I setup React for the future, ensuring that I can render things like instructions or player/profile statuses.</p>
+        <p>I have used React mostly for modals in the /play and /profile endpoints, so that users can navigate the page with greater ease and be informed of when they must be premium members to play online. In the future, I plan on using react to visualize past games and maybe for chat logs, so that players can communicate with other during gameplay. </p>
     </div>
 
     <div class="question">
-        <h4>What data are you storing in your MongoDB?</h4>
-        <p>I store data related to user accounts, such as usernames, passwords, premium status and session data, but I also store match invites, though it has no effect yet. As mentioned before, I plan on storing games as lists of moves, but I am also looking into player statistics or perhaps a ranking system.</p>
+        <h4>What data are you storing in MongoDB?</h4>
+        <p>I mostly have account information stored in MongoDB. I really wanted to have a list of moves for each match that was stored, but unfortunately, errors kept appearing and I needed to show what I have functioning. Eventually, I plan on having not only past matches stored in MongoDB, but also invites sent to other users. In its current state, MongoDB is used mainly for account management, but has support for saved games and invite tracking.</p>
     </div>
 
     <div class="question">
         <h4>What is your profit model?</h4>
-        <p>My original plan for the profit model was to have it so that the expansion pieces, like the ladybug, pillbug and mosquito would be added. However due to limited time, I may just have it so that premium members can use Online services while regular users can only play locally. However, I am also considering having it so that premium players can view their past games.</p>
+        <p>The profit model I designed is based off of the idea that the cost of handling a server would be paid for by the players that use it to connect and play with other players. Premium players unlock online play, the ability to send and accept match invites and the ability to save completed games for later. This profit model is intentionally lightweight, but I plan to add more to this profit model to get invite matches working and saved games to function appropriately.</p>
     </div>
 
     <div class="question">
-        <h4>Do you have a plan for going above and beyond? If so, what is it?</h4>
-        <p>The fact that this UnityWebGL build can run on the web, let alone the fact that this game was created from scratch over the course of the semester seems to me like above and beyond. However, there are many other features that I wish to include to go even further above and beyond. In all honesty, I'd prefer to have a cool application I can talk about in job interviews as opposed to some letters on a piece of paper.</p>
+        <h4>What went right in the development of this project?</h4>
+        <p>A suprising amount of stuff began clicking together when my core systems began finally communicating with one another. Getting Unity WebGL to run inside the express environment was a huge milestone in it of itself, but once I was able to get two players to enter a game with one another, the rest of the features to be implemented became much more managable. Handshakes, though confusing at first, became second hand knowledge and eventually grew into a fully functional cross-technology that feels cohesive.</p>
+    </div>
+
+    <div class="question">
+        <h4>What went wrong in the development of this project?</h4>
+        <p>Most of the issues I encountered happened when errors slipped silently. When no errors appeared in the terminal nor in the console. Unity WebGL is powerful, but it is also extremely particular about how it's served, compressed and initialized. I spent a lot of time researching about Brotli files, MIME types and the Unity Loader before anything was able to be rendered. Multiplayer functionality was it's own can of worms, constantly requiring testing and redesigns. Due to issues with father time, I had to cut the idea of expansion pieces. Debugging and Debug logs took up at least 40% of my time working on this project, but it was for good measure. Nothing really went wrong, but many different issues occured that had to be stamped out, which took away time that could have been used for implementing other features.</p>
+    </div>
+
+    <div class="question">
+        <h4>What did you learn while developing this project?</h4>
+        <p>I learned how to bridge technologies that live in seperate worlds. I learned how Unity communicates with JavaScript through .jslib files, how WebSockets behave inside a Unity WebGl build, how to serialize a game state and how to structure a backend that supports real-time communication and REST endpoints. I learned a lot about how Unity WebGL builds are handled on a browser and, just in general, how to scope project realisitically. I hit a lot of roadblocks and honestly, I wouldn't make it to the end would I have attempted to complete all of the other objectives I really wanted to reach.</p>
+    </div>
+
+    <div class="question">
+        <h4>If you were to continue, what would you do to improve your application?</h4>
+        <p>I actually do plan on continuing and I have a couple thoughts about where to proceed next. Firstly, I want to flesh out all of the Local and Online Play options, flesh out the Rules and all Account based specifics. I would also like to make it so that a ranking system can be implemented, so that rather than having people connect randomly, they can be paired up with other players at least somewhat equal to their level of play. Another idea I've had is to buy an arduino or raspberry pi and make it so that my server will run on it, instead of having to rely on Redis or MongoDB to store information. This also means that I can have it running in person and the cost of running this would be only the cost of electricity.</p>
+    </div>
+
+    <div class="question">
+        <h4>If you went above any beyond, how did you do so?</h4>
+        <p>Going above and beyond is a term I find counterintuitive. In a way, I find it similar to "Do your own thing but make it nice". I feel like students who care and make an effort on their own terms are "above and beyond". I implemented a turn based game that can run on the web, multiple condition checks that bridge between the Unity build and the webpage itself, websockets that communicate frequently to ensure that timeouts don't occur, the ability to change usernames and nicknames (not just passwords) and a favicon to make the page look nice. I could go on and on about all the things I changed that make this game stand out, but really, I want to make the point that this question is, in it of itself, meaningless. Having a requirement of "above and beyond", defeats the purpose of going "above and beyond" in the first place. Expecations are subjective after all.</p>
     </div>
 
     <div class="question">
         <h4>If you borrowed code or code fragments, where did you get them from?</h4>
-        <p>I spent a considerably long time, slogging through roadblocks just to get the game playable on the web. Though I didn't copy from the <a href="https://react-unity-webgl.dev/docs/miscellaneous-instructions/compressed-builds-and-server-configuration">React Unity WebGL documentation</a> directly, I did the equivalent of tracing a picture, going back and forth constantly between documentation to get my build working. I also searched extensively across the web for information about .br files. Thankfully, I came across a pleasing <a href="https://miltoncandelero.github.io/unity-webgl-compression">webpage</a> that made it easier to understand.</p>
+        <p>I think I legitmately spent over a 24 hours reading Unity Documentation. Though it provides a lot of really good information about Unity, it's incredibly hard to sit through. Things like <code>.jslib</code> files for premium verification in my Unity WebGL builds and learning how to call Javascript function from Unity was incredibly difficult. I also referenced multiple community exmaples to understand how to bridge Unity WebGL with browser WebSockets, including how to forward messages into Unity using <code>SendMessage</code> and how to expose a JavaScript <code>Send</code> function back to C#. These examples informed the structure of my WebSocket bridge, but all of my gameplay logic, message formats and multiplayer synchronication code were written by me.</p>
     </div>
     
     <h2>Available Endpoints</h2>
 
     <div class="endpoint">
-        <h3>GET /login</h3>
+        <h3>GET /</h3>
+        <p><strong>Supported Methods:</strong> GET</p>
         <p><strong>Middleware:</strong> requiresSecure, requiresLogout</p>
-        <p>Renders the login page.</p>
+        <p><strong>Description:</strong> Renders the login page.</p>
+        <p><strong>Returns:</strong> HTML</p>
+    </div>
+
+    <div class="endpoint">
+        <h3>GET /login</h3>
+        <p><strong>Supported Methods:</strong> GET</p>
+        <p><strong>Middleware:</strong> requiresSecure, requiresLogout</p>
+        <p><strong>Description:</strong> Renders the login page.</p>
+        <p><strong>Returns:</strong> HTML</p>
     </div>
 
     <div class="endpoint">
         <h3>POST /login</h3>
+        <p><strong>Supported Methods:</strong> POST</p>
         <p><strong>Middleware:</strong> requiresSecure, requiresLogout</p>
-        <p>Attempts to authenticate a user and create a session.</p>
+        <p><strong>Body Params:</strong> username, password</p>
+        <p><strong>Description:</strong> Authenticates a user and creates a session.</p>
+        <p><strong>Returns:</strong> Redirects the user or gives a JSON error</p>
     </div>
 
     <div class="endpoint">
         <h3>GET /signup</h3>
+        <p><strong>Supported Methods:</strong> GET</p>
         <p><strong>Middleware:</strong> requiresSecure, requiresLogout</p>
-        <p>Renders the signup page.</p>
+        <p><strong>Description:</strong> Renders the signup page.</p>
+        <p><strong>Returns:</strong> HTML</p>
     </div>
 
     <div class="endpoint">
         <h3>POST /signup</h3>
+        <p><strong>Supported Methods:</strong> POST</p>
         <p><strong>Middleware:</strong> requiresSecure, requiresLogout</p>
-        <p>Creates a new user account.</p>
+        <p><strong>Body Params:</strong> username, password, password2</p>
+        <p><strong>Description:</strong> Creates a new user account.</p>
+        <p><strong>Returns:</strong> Redirects the user or gives a JSON error</p>
     </div>
 
     <div class="endpoint">
         <h3>GET /logout</h3>
+        <p><strong>Supported Methods:</strong> GET</p>
         <p><strong>Middleware:</strong> requiresSecure, requiresLogin</p>
-        <p>Logs the user out and destroys their session.</p>
+        <p><strong>Description:</strong> Logs the user out and destroys their session.</p>
+        <p><strong>Returns:</strong> Redirects the user</p>
+    </div>
+
+    <div class="endpoint">
+        <h3>GET /profile</h3>
+        <p><strong>Supported Methods:</strong> GET</p>
+        <p><strong>Middleware:</strong> requiresSecure, requiresLogin</p>
+        <p><strong>Description:</strong> Renders the user's profile page.</p>
+        <p><strong>Returns:</strong> HTML</p>
+    </div>
+
+    <div class="endpoint">
+        <h3>POST /account/nickname</h3>
+        <p><strong>Supported Methods:</strong> POST</p>
+        <p><strong>Middleware:</strong> requiresLogin</p>
+        <p><strong>Body Params:</strong> nickname</p>
+        <p><strong>Description:</strong> Updates the user's nickname.</p>
+        <p><strong>Returns:</strong> JSON</p>
+    </div>
+
+    <div class="endpoint">
+        <h3>POST /account/username</h3>
+        <p><strong>Supported Methods:</strong> POST</p>
+        <p><strong>Middleware:</strong> requiresLogin</p>
+        <p><strong>Body Params:</strong> username</p>
+        <p><strong>Description:</strong> Updates the user's username.</p>
+        <p><strong>Returns:</strong> JSON</p>
+    </div>
+
+    <div class="endpoint">
+        <h3>POST /account/password</h3>
+        <p><strong>Supported Methods:</strong> POST</p>
+        <p><strong>Middleware:</strong> requiresLogin</p>
+        <p><strong>Body Params:</strong> password, newPassword</p>
+        <p><strong>Description:</strong> Updates the user's password.</p>
+        <p><strong>Returns:</strong> JSON</p>
+    </div>
+
+    <div class="endpoint">
+        <h3>GET /account/status</h3>
+        <p><strong>Supported Methods:</strong> GET</p>
+        <p><strong>Middleware:</strong> requiresLogin</p>
+        <p><strong>Description:</strong> Returns whether the user is premium and allowed to play online.</p>
+        <p><strong>Returns:</strong> JSON { premium, allowedOnline }</p>
     </div>
 
     <div class="endpoint">
         <h3>POST /premium/toggle</h3>
+        <p><strong>Supported Methods:</strong> POST</p>
         <p><strong>Middleware:</strong> requiresLogin</p>
-        <p>Toggles the user's premium status (profit model).</p>
+        <p><strong>Description:</strong> Toggles the user's premium status.</p>
+        <p><strong>Returns:</strong> JSON</p>
     </div>
 
     <div class="endpoint">
         <h3>POST /invite/create</h3>
+        <p><strong>Supported Methods:</strong> POST</p>
         <p><strong>Middleware:</strong> requiresLogin</p>
-        <p>Creates a new invite‑based match.</p>
+        <p><strong>Body Params:</strong> opponentUsername</p>
+        <p><strong>Description:</strong> Creates a new invite‑based match.</p>
+        <p><strong>Returns:</strong> JSON that contains the match ID</p>
     </div>
 
     <div class="endpoint">
         <h3>GET /invite/:gameId</h3>
+        <p><strong>Supported Methods:</strong> GET</p>
         <p><strong>Middleware:</strong> requiresLogin</p>
-        <p>Retrieves an invite match by ID.</p>
+        <p><strong>URL Params:</strong> gameId</p>
+        <p><strong>Description:</strong> Retrieves an invite match by ID.</p>
+        <p><strong>Returns:</strong> JSON</p>
     </div>
 
     <div class="endpoint">
         <h3>GET /playerCount</h3>
-        <p>No middleware.</p>
-        <p>Returns the number of connected WebSocket players. Will be used to display number of Online players.</p>
+        <p><strong>Supported Methods:</strong> GET</p>
+        <p><strong>Middleware:</strong> None</p>
+        <p><strong>Description:</strong> Returns the number of connected WebSocket players.</p>
+        <p><strong>Returns:</strong> JSON { count }</p>
     </div>
 
     <div class="endpoint">
         <h3>GET /play</h3>
-        <p>No middleware.</p>
-        <p>Serves the Unity WebGL + React game client.</p>
+        <p><strong>Supported Methods:</strong> GET</p>
+        <p><strong>Middleware:</strong> None</p>
+        <p><strong>Description:</strong> Serves the Unity WebGL + React game client.</p>
+        <p><strong>Returns:</strong> HTML</p>
+    </div>
+
+    <div class="endpoint">
+        <h3>POST /games/save</h3>
+        <p><strong>Supported Methods:</strong> POST</p>
+        <p><strong>Middleware:</strong> requiresLogin</p>
+        <p><strong>Body Params:</strong> gameId, winner, moves[]</p>
+        <p><strong>Description:</strong> Saves a completed game to MongoDB for premium users.</p>
+        <p><strong>Returns:</strong> JSON { success: true }</p>
     </div>
 
     <div class="endpoint">
         <h3>GET /documentation</h3>
-        <p>No middleware.</p>
-        <p>Renders this documentation page.</p>
+        <p><strong>Supported Methods:</strong> GET</p>
+        <p><strong>Middleware:</strong> None</p>
+        <p><strong>Description:</strong> Renders this documentation page.</p>
+        <p><strong>Returns:</strong> HTML</p>
     </div>
 
+    <div class="endpoint">
+        <h3>GET /premium</h3>
+        <p><strong>Supported Methods:</strong> GET</p>
+        <p><strong>Middleware:</strong> requiresSecure, requiresLogin</p>
+        <p><strong>Description:</strong> Renders the premium page.</p>
+        <p><strong>Returns:</strong> HTML</p>
+    </div>
+
+    <div class="endpoint">
+        <h3>GET /*wild</h3>
+        <p><strong>Supported Methods:</strong> GET</p>
+        <p><strong>Middleware:</strong> None</p>
+        <p><strong>Description:</strong> Catches all unknown routes and renders the 404 page.</p>
+        <p><strong>Returns:</strong> HTML</p>
+    </div>
+
+    <p>Hello :)</p>
 </div>

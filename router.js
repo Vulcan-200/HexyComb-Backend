@@ -4,8 +4,10 @@ const express = require('express');
 const router = express.Router();
 
 const controllers = require('./src/controllers');
+const GameRecord = require('./src/models/GameRecord');
 const Account = controllers.Account;
 const Match = controllers.Match;
+const Game = controllers.Game;
 const mid = require('./middleware');
 
 // -- Account Routes --
@@ -44,6 +46,22 @@ router.get('/', mid.requiresSecure, mid.requiresLogout, Account.loginPage);
 // -- Game --
 router.get('/play', (req, res) => {
     res.render('play');
+});
+
+router.post("/games/save", async (req, res) => {
+    const { gameId, winner, moves } = req.body;
+
+    const record = new GameRecord({
+        userId: req.session.account._id,
+        gameId,
+        winner,
+        moves,
+        createdAt: new Date()
+    });
+
+    await record.save();
+
+    res.json({ success: true });
 });
 
 // -- Documentation --
