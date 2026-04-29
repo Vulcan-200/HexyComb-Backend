@@ -78,6 +78,7 @@ button {
   font-weight: 700;
   cursor: pointer;
   transition: 0.2s;
+  margin: 10px 0;
 }
 
 button:hover {
@@ -282,4 +283,29 @@ button:hover {
 #free-text {
   color: #2980b9;
   font-weight: 700;
+}
+
+#play-logo {
+  width: 500px;
+  margin: 20px 0;
+}
+
+#play-intro {
+  width: 60%;
+  font-family: 'Hanken Grotesk', sans-serif;
+}
+
+#play-intro h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+#play-intro p {
+  font-size: 1.1rem;
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+#logo {
+  width: 500px;
 }

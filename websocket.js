@@ -6,6 +6,9 @@ const { connect } = require('http2');
 let connectedPlayers = new Set();
 let randomQueue = [];
 
+let games = {};
+
+
 function startWebSocketServer(server, sessionMiddleware)
 {
     const wss = new WebSocketServer({ noServer: true});
@@ -70,6 +73,10 @@ function startWebSocketServer(server, sessionMiddleware)
                     handleRandomQueue(ws, data.playerId);
                     break;
 
+                case 'ready':
+                    handleReady(ws, data);
+                    break;
+
                 case 'move':
                     forwardMove(ws, data);
                     break;
@@ -109,6 +116,11 @@ function startWebSocketServer(server, sessionMiddleware)
         const white = Math.random() < 0.5 ? ws: opponent.ws;
         const black = white === ws ? opponent.ws : ws;
 
+        games[gameId] = {
+            white: { ws: white, ready: false },
+            black: { ws: black, ready: false }
+        };
+
         white.send(JSON.stringify({
             type: 'match_found',
             gameId,
@@ -134,6 +146,33 @@ function startWebSocketServer(server, sessionMiddleware)
                 }));
             }
         });
+    }
+
+    function handleReady(ws, data)
+    {
+        const { gameId, playerColor } = data;
+
+        if (!games[gameId]) {
+            console.warn("Ready received for unknown game:", gameId);
+            return;
+        }
+
+        const game = games[gameId];
+
+        if (playerColor === "white") {
+            game.white.ready = true;
+        } else {
+            game.black.ready = true;
+        }
+
+        console.log(`Player ${playerColor} is ready for game ${gameId}`);
+
+        if (game.white.ready && game.black.ready) {
+            console.log("Both players are ready. Starting game: " + gameId);
+
+            game.white.ws.send(JSON.stringify({ type: "start_game" }));
+            game.black.ws.send(JSON.stringify({ type: "start_game" }));
+        }
     }
 }
 

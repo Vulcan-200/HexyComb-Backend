@@ -11,9 +11,6 @@ const App = () => {
 
     return (
         <div>
-            <h1>Surround your opponent's queen bee first!</h1>
-            <p>Who will win?</p>
-
             <PremiumModal 
                 visible={showPremiumModal}
                 onClose={() => setShowPremiumModal(false)}
